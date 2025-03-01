@@ -1,1 +1,31 @@
-<p>chat works!</p>
+<div class="chat-container">
+  <div class="messages">
+    <div *ngFor="let message of messages">
+      <div class="message" [ngClass]="{'incoming': message.author !== userName, 'outgoing': message.author === userName}">
+        <span class="author">{{ message.author }}</span>
+        <div class="message-content">
+          {{ message.text }}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="chat-input-container">
+    <mat-form-field appearance="outline" class="input-field">
+      <mat-label>Введите сообщение</mat-label>
+      <input
+        matInput
+        [formControl]="messageControl"
+        (keydown.enter)="sendMessage()"
+      />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="sendMessage()"
+      [disabled]="!messageControl.value?.trim()"
+    >
+      Отправить
+    </button>
+  </div>
+</div>
