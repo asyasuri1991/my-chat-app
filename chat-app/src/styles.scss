@@ -1,0 +1,21 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+  display: flex;
+}
+
+app-sidebar {
+  width: 200px;
+}
+
+app-chat {
+  flex-grow: 1;
+}

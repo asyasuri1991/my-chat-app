@@ -1,0 +1,17 @@
+<ng-container *ngIf="!showModal && userName; else noUserTemplate">
+  <app-header [userName]="userName"></app-header>
+  <div class="container">
+    <app-sidebar></app-sidebar>
+    <app-chat></app-chat>
+  </div>
+</ng-container>
+
+<ng-template #noUserTemplate>
+  <div class="no-user">
+    <h2>Ты не ввел имя 😔</h2>
+    <img
+      src="assets/images/no-user.jpg"
+      alt="Нет пользователя"
+      class="no-user-image" />
+  </div>
+</ng-template>
