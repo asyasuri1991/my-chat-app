@@ -8,6 +8,7 @@ import { ChatService } from '@features/chat/services/chat.service';
 import { ContactsModalComponent } from '@features/contacts-modal/contacts-modal.component';
 import { getUserName, saveUserName } from '@features/user/model/user.storage';
 import { UserModalComponent } from '@features/user/ui/user-modal/user-modal.component';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-root',
@@ -25,13 +26,14 @@ import { UserModalComponent } from '@features/user/ui/user-modal/user-modal.comp
 export class AppComponent implements OnInit {
   userName: string = '';
   showModal: boolean = true;
-
+  processedMessages = new Set<string>();
   public broadcastChannel = new BroadcastChannel('chat_channel');
-
+  
   constructor(private dialog: MatDialog, private chatService: ChatService) {}
 
   ngOnInit(): void {
     this.userName = getUserName() || '';
+    console.log('Полученное userName:', this.userName);
     if (!this.userName) {
       this.openModal();
     } else {
@@ -42,8 +44,13 @@ export class AppComponent implements OnInit {
 
   setupBroadcastListener(): void {
     this.broadcastChannel.onmessage = (event) => {
-      if (event.data.userName && event.data.message) {
-        this.syncMessage(event.data.userName, event.data.message);
+      const data = event.data;
+      if (!data.id || this.processedMessages.has(data.id)) {
+        return;
+      }
+      this.processedMessages.add(data.id);
+      if (data.userName && data.message) {
+        this.syncMessage(data.userName, data.message);
       }
     };
   }
@@ -54,7 +61,9 @@ export class AppComponent implements OnInit {
   }
 
   sendMessage(message: string): void {
-    this.broadcastChannel.postMessage({ userName: this.userName, message });
+    const messageId = uuidv4();
+    const data = { id: messageId, userName: this.userName, message };
+    this.broadcastChannel.postMessage(data);
     this.chatService.addMessage(this.userName, message);
   }
 
@@ -74,6 +83,7 @@ export class AppComponent implements OnInit {
     this.userName = userName.trim();
     saveUserName(this.userName);
     this.showModal = false;
+    this.chatService.clearMessages();
   }
 
   handleCloseModal(): void {

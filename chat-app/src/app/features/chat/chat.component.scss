@@ -19,14 +19,9 @@
       margin: 8px 0;
       position: relative;
 
-      &.incoming {
-        align-self: flex-start;
-        background-color: #e0f7fa;
-      }
-
       &.outgoing {
         align-self: flex-end;
-        background-color: #c8e6c9;
+        background-color: #e0f7fa;
       }
 
       .author {

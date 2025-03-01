@@ -21,16 +21,15 @@ import { Subscription } from 'rxjs';
     CommonModule,
   ],
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit {
   @Input() userName: string = 'User';
   messageControl = new FormControl('');
   messages: Message[] = [];
-  private subscription!: Subscription;
 
   constructor(public chatService: ChatService) {}
 
   ngOnInit(): void {
-    this.subscription = this.chatService.messages$.subscribe((messages) => {
+    this.chatService.messages$.subscribe((messages) => {
       this.messages = messages;
     });
   }
@@ -40,12 +39,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     if (messageText) {
       this.chatService.addMessage(this.userName, messageText);
       this.messageControl.reset();
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
     }
   }
 }

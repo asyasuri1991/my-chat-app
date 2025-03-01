@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Message } from '../models/message.model';
@@ -16,23 +17,22 @@ export class ChatService {
 
   addMessage(author: string, text: string): void {
     const message: Message = {
+      id: uuidv4(),
       author,
       text,
       timestamp: new Date(),
     };
-
     const currentMessages = this.getMessages();
     currentMessages.push(message);
     localStorage.setItem('chat_messages', JSON.stringify(currentMessages));
     this.messagesSubject.next(currentMessages);
-    
     this.broadcastChannel.postMessage(message);
   }
 
   getMessages(): Message[] {
     return JSON.parse(localStorage.getItem('chat_messages') || '[]');
   }
-
+  
   setupBroadcastListener(): void {
     this.broadcastChannel.onmessage = (event) => {
       const message = event.data as Message;
@@ -45,7 +45,6 @@ export class ChatService {
 
   clearMessages(): void {
     localStorage.removeItem('chat_messages');
-  
     this.messagesSubject.next([]);
   }
 }

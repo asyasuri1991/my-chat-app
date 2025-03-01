@@ -1,8 +1,27 @@
+<div class="search-bar">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input
+      matInput
+      (input)="filterMessages($event)"
+    />
+  </mat-form-field>
+</div>
+
+<div *ngIf="!(filteredMessages$ | async)?.length" class="empty-sidebar">
+  Здесь будут отображаться ваши сообщения
+</div>
+
 <mat-list class="sidebar">
-  <mat-list-item *ngFor="let message of (messages$ | async)">
+  <mat-list-item *ngFor="let message of filteredMessages$ | async">
     <mat-card class="message-card">
-      <mat-card-title>{{ message.author }}</mat-card-title>
-      <mat-card-subtitle>{{ message.timestamp | date: 'short' }}</mat-card-subtitle>
+      <mat-card-title>
+        {{ message.author === userName ? "Вы" : message.author }}
+      </mat-card-title>
+      <mat-card-subtitle>{{
+        message.timestamp | date : "short"
+      }}</mat-card-subtitle>
       <mat-card-content>{{ message.text }}</mat-card-content>
     </mat-card>
   </mat-list-item>

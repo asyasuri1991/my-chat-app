@@ -1,15 +1,16 @@
-<h2 mat-dialog-title>Как тебя зовут?</h2>
-<mat-dialog-content>
+<h2 mat-dialog-title class="title">Как тебя зовут?</h2>
+<mat-dialog-content align="center">
   <mat-form-field class="full-width">
     <mat-label>Имя</mat-label>
     <input
       matInput
       [(ngModel)]="userName"
       placeholder="Введите имя"
-      (keydown)="onKeyDown($event)" />
+      (keydown)="onKeyDown($event)"
+    />
   </mat-form-field>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="center">
   <button mat-button mat-dialog-close color="warn" (click)="handleClose()">
     Отмена
   </button>
@@ -17,7 +18,8 @@
     mat-raised-button
     color="primary"
     [disabled]="!userName.trim()"
-    (click)="handleSave()">
+    (click)="handleSave()"
+  >
     Сохранить
   </button>
 </mat-dialog-actions>

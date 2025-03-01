@@ -1,12 +1,19 @@
 .sidebar {
-  width: 300px;
+  // width: 20%;
+  height: 100%;
   background-color: #f2f2f2;
   padding: 10px;
+}
+
+.empty-sidebar {
+  padding: 24px 16px;
+  font-size: 16px;
 }
 
 .message-card {
   margin-bottom: 10px;
   padding: 10px;
+  width: 100%;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -14,4 +21,34 @@
 
 mat-list-item {
   margin-bottom: 10px;
+}
+
+.sidebar {
+  list-style: none;
+
+  mat-card-title {
+    font-weight: bold;
+  }
+
+  mat-card-subtitle {
+    color: #888888;
+    font-size: 0.875rem;
+  }
+}
+
+.search-bar {
+  padding: 16px;
+}
+
+.sidebar {
+  padding: 16px;
+}
+
+.message-card {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.full-width {
+  width: 100%;
 }

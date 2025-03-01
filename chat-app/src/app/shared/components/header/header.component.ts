@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 import { ContactsModalComponent } from '@features/contacts-modal/contacts-modal.component';
 
 const USER_KEY = 'chat_user';
@@ -9,6 +12,7 @@ const USER_KEY = 'chat_user';
   standalone: true,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  imports: [CommonModule, MatIconModule, MatButtonModule]
 })
 export class HeaderComponent {
   @Input() userName: string = '';
@@ -26,12 +30,10 @@ export class HeaderComponent {
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.removeItem(USER_KEY);
     }
-
     if (this.broadcastChannel) {
       this.broadcastChannel.close();
       console.log('BroadcastChannel закрыт');
     }
-
     window.location.reload();
   }
 }
