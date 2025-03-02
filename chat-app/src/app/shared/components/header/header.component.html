@@ -1,7 +1,7 @@
 <header class="header">
   <div class="welcome-block">
     <img src="assets/images/logo.png" alt="Логотип" width="32" height="32" />
-    <h1 class="text">Добро пожаловать, {{ userName }}!</h1>
+    <h1 class="text">Добро пожаловать, {{ user.name }}!</h1>
   </div>
   <button mat-raised-button color="warn" (click)="logout()" class="button">
     <mat-icon>exit_to_app</mat-icon>

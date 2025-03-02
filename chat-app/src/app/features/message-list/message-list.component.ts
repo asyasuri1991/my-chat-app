@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ChatService } from '@features/chat/services/chat.service';
 import { Message } from '@features/chat/models/message.model';
 import { map, switchMap } from 'rxjs/operators';
+import { User } from '@features/user/model/user.model';
 
 @Component({
   selector: 'app-message-list',
@@ -25,7 +26,7 @@ import { map, switchMap } from 'rxjs/operators';
   ],
 })
 export class MessageListComponent {
-  @Input() userName: string = 'User';
+  @Input() userName: User = { name: 'User' };
 
   messages$: Observable<Message[]>;
 
@@ -34,7 +35,7 @@ export class MessageListComponent {
   filteredMessages$: Observable<Message[]>;
 
   constructor(private chatService: ChatService) {
-    console.log('Полученный userName:', this.userName);
+    console.log('Полученный userName:', this.userName.name);
     this.messages$ = this.chatService.messages$;
 
     this.filteredMessages$ = this.searchTerm$.pipe(
@@ -42,7 +43,7 @@ export class MessageListComponent {
       switchMap((term: string) =>
         this.messages$.pipe(
           map((messages: Message[]) =>
-            messages.filter((message: Message) => 
+            messages.filter((message: Message) =>
               message.text.toLowerCase().includes(term)
             )
           )

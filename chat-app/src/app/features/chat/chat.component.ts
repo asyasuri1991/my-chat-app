@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Subscription } from 'rxjs';
+import { User } from '@features/user/model/user.model';
 
 @Component({
   selector: 'app-chat',
@@ -22,7 +23,7 @@ import { Subscription } from 'rxjs';
   ],
 })
 export class ChatComponent implements OnInit {
-  @Input() userName: string = 'User';
+  @Input() userName: User = { name: 'User' };
   messageControl = new FormControl('');
   messages: Message[] = [];
 
@@ -37,7 +38,7 @@ export class ChatComponent implements OnInit {
   sendMessage(): void {
     const messageText = this.messageControl.value?.trim();
     if (messageText) {
-      this.chatService.addMessage(this.userName, messageText);
+      this.chatService.addMessage(this.userName.name, messageText);
       this.messageControl.reset();
     }
   }

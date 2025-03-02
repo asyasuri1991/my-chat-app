@@ -3,9 +3,8 @@
     <div *ngFor="let message of messages">
       <div
         class="message"
-        [ngClass]="{'outgoing': message.author === userName}"
+        [ngClass]="{ outgoing: message.author === userName.name }"
       >
-        <span class="author">{{ message.author }}</span>
         <div class="message-content">
           {{ message.text }}
         </div>

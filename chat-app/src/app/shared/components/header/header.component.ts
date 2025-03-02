@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { User } from '@features/user/model/user.model';
 
 const USER_KEY = 'chat_user';
 
@@ -14,7 +15,7 @@ const USER_KEY = 'chat_user';
   imports: [CommonModule, MatIconModule, MatButtonModule]
 })
 export class HeaderComponent {
-  @Input() userName: string = '';
+  @Input() user!: User;
   @Input() broadcastChannel!: BroadcastChannel;
 
   constructor(private dialog: MatDialog) {}

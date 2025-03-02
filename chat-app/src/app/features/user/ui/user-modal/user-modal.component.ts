@@ -9,6 +9,7 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { User } from '@features/user/model/user.model';
 
 @Component({
   selector: 'app-user-modal',
@@ -25,27 +26,27 @@ import { MatInputModule } from '@angular/material/input';
   styleUrls: ['./user-modal.component.scss'],
 })
 export class UserModalComponent {
-  userName: string = ''; // Поле имени
+  userName: User = { name: '' };
   @Output() saveUserName = new EventEmitter<string>();
   @Output() closeModal = new EventEmitter<void>();
 
   constructor(
-    public dialogRef: MatDialogRef<UserModalComponent>, // автоматически инжектируется
-    @Inject(MAT_DIALOG_DATA) public data: { userName: string } // автоматически инжектируется
+    public dialogRef: MatDialogRef<UserModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { userName: string }
   ) {}
 
   handleSave(): void {
-    if (this.userName.trim()) {
-      this.dialogRef.close(this.userName.trim()); // Закрываем окно и передаем имя
+    if (this.userName.name.trim()) {
+      this.dialogRef.close(this.userName.name.trim());
     }
   }
 
   handleClose(): void {
-    this.dialogRef.close(); // Просто закрываем окно без передачи данных
+    this.dialogRef.close();
   }
 
   onKeyDown(event: KeyboardEvent): void {
-    if (event.key === 'Enter' && this.userName.trim()) {
+    if (event.key === 'Enter' && this.userName.name.trim()) {
       this.handleSave();
     }
   }

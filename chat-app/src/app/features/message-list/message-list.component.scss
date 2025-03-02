@@ -2,29 +2,36 @@
   padding: 1rem;
 }
 
+.empty-wrapper {
+  padding: 1.5rem 1rem;
+  font-size: 1rem;
+  text-align: center;
+  color: #aaa;
+}
+
 .wrapper {
   padding: 1rem;
   height: 100%;
   background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
 }
 
-.empty-wrapper {
-  padding: 1.5rem 1rem;
-  font-size: 1rem;
+.mat-list-item {
+  height: 200px;
+  margin-bottom: 1rem;
 }
 
-.message-card {
-  width: 100%;
-  margin-bottom: 0.8rem;
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.author {
+  font-weight: bold;
+  color: #3f51b5;
+  white-space: normal;
+  text-overflow: clip;
 }
 
-mat-list-item {
-  margin-bottom: 0.8rem;
-}
-
-.full-width {
-  width: 100%;
+.timestamp {
+  font-size: 0.8em;
+  color: #999;
 }

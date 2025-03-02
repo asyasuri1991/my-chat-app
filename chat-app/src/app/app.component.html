@@ -1,6 +1,6 @@
-<ng-container *ngIf="!showModal && userName; else noUserTemplate">
+<ng-container *ngIf="!showModal && userName.name; else noUserTemplate">
   <app-header
-    [userName]="userName"
+    [user]="userName"
     [broadcastChannel]="broadcastChannel"
   ></app-header>
   <div class="container">

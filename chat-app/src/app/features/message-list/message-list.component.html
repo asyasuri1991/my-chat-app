@@ -1,11 +1,8 @@
 <div class="search-bar">
   <mat-form-field appearance="fill" class="full-width">
-    <mat-label></mat-label>
+    <mat-label>Поиск</mat-label>
     <mat-icon matPrefix>search</mat-icon>
-    <input
-      matInput
-      (input)="filterMessages($event)"
-    />
+    <input matInput (input)="filterMessages($event)" />
   </mat-form-field>
 </div>
 
@@ -15,26 +12,34 @@
 
 <div *ngIf="messages$ | async as allMessages; else loading">
   <div *ngIf="filteredMessages$ | async as filteredMessages">
-    <div *ngIf="filteredMessages.length === 0 && allMessages.length > 0" class="empty-sidebar">
+    <div
+      *ngIf="filteredMessages.length === 0 && allMessages.length > 0"
+      class="empty-wrapper"
+    >
       Не найдено
     </div>
   </div>
 </div>
 
 <ng-template #loading>
-  <div>Загрузка...</div>
+  <div class="empty-wrapper">Загрузка...</div>
 </ng-template>
 
-<mat-list class="wrapper">
-  <mat-list-item *ngFor="let message of filteredMessages$ | async">
-    <mat-card class="message-card">
-      <mat-card-title>
-        {{ message.author === userName ? "Вы" : message.author }}
-      </mat-card-title>
-      <mat-card-subtitle>{{
-        message.timestamp | date : "short"
-      }}</mat-card-subtitle>
-      <mat-card-content>{{ message.text }}</mat-card-content>
+<ul class="wrapper">
+  <li
+    *ngFor="let message of filteredMessages$ | async"
+    [ngClass]="{ outgoing: message.author === userName.name }"
+  >
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title class="author">{{ message.author }}</mat-card-title>
+        <mat-card-subtitle class="timestamp">{{
+          message.timestamp | date : "short"
+        }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="message-content">{{ message.text }}</p>
+      </mat-card-content>
     </mat-card>
-  </mat-list-item>
-</mat-list>
+  </li>
+</ul>

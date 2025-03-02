@@ -4,7 +4,7 @@
     <mat-label>Имя</mat-label>
     <input
       matInput
-      [(ngModel)]="userName"
+      [(ngModel)]="userName.name"
       placeholder="Введите имя"
       (keydown)="onKeyDown($event)"
     />
@@ -17,7 +17,7 @@
   <button
     mat-raised-button
     color="primary"
-    [disabled]="!userName.trim()"
+    [disabled]="!userName.name.trim()"
     (click)="handleSave()"
   >
     Сохранить
