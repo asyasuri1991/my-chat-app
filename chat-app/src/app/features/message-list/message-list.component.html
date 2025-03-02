@@ -9,11 +9,23 @@
   </mat-form-field>
 </div>
 
-<div *ngIf="!(filteredMessages$ | async)?.length" class="empty-sidebar">
+<div *ngIf="!(messages$ | async)?.length" class="empty-wrapper">
   Здесь будут отображаться ваши сообщения
 </div>
 
-<mat-list class="sidebar">
+<div *ngIf="messages$ | async as allMessages; else loading">
+  <div *ngIf="filteredMessages$ | async as filteredMessages">
+    <div *ngIf="filteredMessages.length === 0 && allMessages.length > 0" class="empty-sidebar">
+      Не найдено
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div>Загрузка...</div>
+</ng-template>
+
+<mat-list class="wrapper">
   <mat-list-item *ngFor="let message of filteredMessages$ | async">
     <mat-card class="message-card">
       <mat-card-title>

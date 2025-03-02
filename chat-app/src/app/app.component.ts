@@ -2,10 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HeaderComponent } from '@components/header/header.component';
-import { SidebarComponent } from '@components/sidebar/sidebar.component';
+import { MessageListComponent } from '@features/message-list/message-list.component';
 import { ChatComponent } from '@features/chat/chat.component';
 import { ChatService } from '@features/chat/services/chat.service';
-import { ContactsModalComponent } from '@features/contacts-modal/contacts-modal.component';
 import { getUserName, saveUserName } from '@features/user/model/user.storage';
 import { UserModalComponent } from '@features/user/ui/user-modal/user-modal.component';
 import { v4 as uuidv4 } from 'uuid';
@@ -18,7 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
   imports: [
     CommonModule,
     HeaderComponent,
-    SidebarComponent,
+    MessageListComponent,
     ChatComponent,
     MatDialogModule,
   ],
@@ -88,9 +87,5 @@ export class AppComponent implements OnInit {
 
   handleCloseModal(): void {
     this.showModal = false;
-  }
-
-  openContactsModal(): void {
-    this.dialog.open(ContactsModalComponent);
   }
 }

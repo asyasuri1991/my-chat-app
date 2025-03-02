@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { ContactsModalComponent } from '@features/contacts-modal/contacts-modal.component';
 
 const USER_KEY = 'chat_user';
 
@@ -19,12 +18,6 @@ export class HeaderComponent {
   @Input() broadcastChannel!: BroadcastChannel;
 
   constructor(private dialog: MatDialog) {}
-
-  openContactsModal(): void {
-    this.dialog.open(ContactsModalComponent, {
-      width: '600px',
-    });
-  }
 
   logout(): void {
     if (typeof window !== 'undefined' && window.localStorage) {

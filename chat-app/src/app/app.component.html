@@ -1,17 +1,16 @@
 <ng-container *ngIf="!showModal && userName; else noUserTemplate">
-  <app-header [userName]="userName" [broadcastChannel]="broadcastChannel"></app-header>
+  <app-header
+    [userName]="userName"
+    [broadcastChannel]="broadcastChannel"
+  ></app-header>
   <div class="container">
-    <app-sidebar [userName]="userName"></app-sidebar>
+    <app-message-list [userName]="userName"></app-message-list>
     <app-chat [userName]="userName"></app-chat>
   </div>
 </ng-container>
 
 <ng-template #noUserTemplate>
   <div class="no-user">
-    <h2>Ты не ввел имя 😔</h2>
-    <img
-      src="assets/images/no-user.jpg"
-      alt="Нет пользователя"
-      class="no-user-image" />
+    <button mat-raised-button (click)="openModal()">Войти</button>
   </div>
 </ng-template>

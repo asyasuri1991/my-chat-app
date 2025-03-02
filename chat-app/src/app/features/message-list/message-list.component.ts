@@ -11,10 +11,10 @@ import { Message } from '@features/chat/models/message.model';
 import { map, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-message-list',
   standalone: true,
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  templateUrl: './message-list.component.html',
+  styleUrls: ['./message-list.component.scss'],
   imports: [
     CommonModule,
     MatListModule,
@@ -24,7 +24,7 @@ import { map, switchMap } from 'rxjs/operators';
     MatIconModule,
   ],
 })
-export class SidebarComponent {
+export class MessageListComponent {
   @Input() userName: string = 'User';
 
   messages$: Observable<Message[]>;
@@ -34,6 +34,7 @@ export class SidebarComponent {
   filteredMessages$: Observable<Message[]>;
 
   constructor(private chatService: ChatService) {
+    console.log('Полученный userName:', this.userName);
     this.messages$ = this.chatService.messages$;
 
     this.filteredMessages$ = this.searchTerm$.pipe(
@@ -41,8 +42,8 @@ export class SidebarComponent {
       switchMap((term: string) =>
         this.messages$.pipe(
           map((messages: Message[]) =>
-            messages.filter(
-              (message: Message) => message.text.toLowerCase().includes(term)
+            messages.filter((message: Message) => 
+              message.text.toLowerCase().includes(term)
             )
           )
         )

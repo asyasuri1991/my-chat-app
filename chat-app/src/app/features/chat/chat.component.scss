@@ -2,21 +2,21 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 16px;
+  padding: 1rem;
   background-color: #f9f9f9;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 
   .messages {
     flex-grow: 1;
     overflow-y: auto;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
 
     .message {
       max-width: 70%;
-      padding: 10px;
+      padding: 0.8rem;
       border-radius: 15px;
-      margin: 8px 0;
+      margin: 0.5rem 0;
       position: relative;
 
       &.outgoing {
@@ -26,7 +26,7 @@
 
       .author {
         font-weight: bold;
-        margin-bottom: 4px;
+        margin-bottom: 0.4rem;
       }
 
       .message-content {
@@ -41,7 +41,7 @@
 
     .input-field {
       flex-grow: 1;
-      margin-right: 8px;
+      margin-right: 0.5rem;
     }
   }
 }

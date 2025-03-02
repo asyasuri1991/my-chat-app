@@ -1,0 +1,30 @@
+.search-bar {
+  padding: 1rem;
+}
+
+.wrapper {
+  padding: 1rem;
+  height: 100%;
+  background-color: #f2f2f2;
+}
+
+.empty-wrapper {
+  padding: 1.5rem 1rem;
+  font-size: 1rem;
+}
+
+.message-card {
+  width: 100%;
+  margin-bottom: 0.8rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+mat-list-item {
+  margin-bottom: 0.8rem;
+}
+
+.full-width {
+  width: 100%;
+}
