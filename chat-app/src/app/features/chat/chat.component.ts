@@ -1,13 +1,14 @@
 import { Component, OnDestroy, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Message } from './models/message.model';
-import { ChatService } from './services/chat.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Subscription } from 'rxjs';
-import { User } from '@features/user/model/user.model';
+
+import { Message } from './models/message.model';
+import { ChatService } from './services/chat.service';
+import { User } from '@features/user/models/user.model';
 
 @Component({
   selector: 'app-chat',

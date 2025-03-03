@@ -2,14 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { v4 as uuidv4 } from 'uuid';
+
 import { HeaderComponent } from '@components/header/header.component';
 import { MessageListComponent } from '@features/message-list/message-list.component';
 import { ChatComponent } from '@features/chat/chat.component';
 import { ChatService } from '@features/chat/services/chat.service';
-import { getUserName, saveUserName } from '@features/user/model/user.storage';
-import { UserModalComponent } from '@features/user/ui/user-modal/user-modal.component';
-import { v4 as uuidv4 } from 'uuid';
-import { User } from '@features/user/model/user.model';
+import { getUserName, saveUserName } from '@features/user/models/user.storage';
+import { UserModalComponent } from '@features/user/user-modal.component';
+import { User } from '@features/user/models/user.model';
+
 
 @Component({
   selector: 'app-root',
@@ -29,7 +31,7 @@ export class AppComponent implements OnInit {
   userName: User = { name: '' };
   showModal: boolean = true;
   broadcastChannel: BroadcastChannel;
-  
+
   constructor(private dialog: MatDialog, private chatService: ChatService) {
     this.broadcastChannel = new BroadcastChannel('chat_channel');
   }

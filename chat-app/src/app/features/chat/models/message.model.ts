@@ -2,5 +2,5 @@ export interface Message {
   id: string;
   author: string;
   text: string;
-  timestamp: Date;
+  date: Date;
 }

@@ -6,10 +6,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { map, switchMap } from 'rxjs/operators';
+
 import { ChatService } from '@features/chat/services/chat.service';
 import { Message } from '@features/chat/models/message.model';
-import { map, switchMap } from 'rxjs/operators';
-import { User } from '@features/user/model/user.model';
+import { User } from '@features/user/models/user.model';
 
 @Component({
   selector: 'app-message-list',

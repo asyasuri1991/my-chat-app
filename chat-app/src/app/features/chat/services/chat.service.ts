@@ -1,7 +1,8 @@
-import { v4 as uuidv4 } from 'uuid';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { Message } from '../models/message.model';
+import { v4 as uuidv4 } from 'uuid';
+
+import { Message } from '@features/chat/models/message.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class ChatService {
 
   constructor() {
     this.setupBroadcastListener();
+    this.initMessages();
   }
 
   sendMessage(author: string, text: string): void {
@@ -20,14 +22,11 @@ export class ChatService {
       id: uuidv4(),
       author,
       text,
-      timestamp: new Date(),
+      date: new Date(),
     };
-
     const updatedMessages = [...this.getMessages(), message];
     localStorage.setItem('chat_messages', JSON.stringify(updatedMessages));
-    
     this.broadcastChannel.postMessage(message);
-    
     this.messagesSubject.next(updatedMessages);
   }
 
@@ -39,13 +38,17 @@ export class ChatService {
     this.broadcastChannel.onmessage = (event) => {
       const message = event.data as Message;
       const currentMessages = this.getMessages();
-
       if (!currentMessages.some((m) => m.id === message.id)) {
         const updatedMessages = [...currentMessages, message];
         localStorage.setItem('chat_messages', JSON.stringify(updatedMessages));
         this.messagesSubject.next(updatedMessages);
       }
     };
+  }
+
+  private initMessages(): void {
+    const currentMessages = this.getMessages();
+    this.messagesSubject.next(currentMessages);
   }
 
   clearMessages(): void {

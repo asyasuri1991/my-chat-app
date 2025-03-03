@@ -1,4 +1,4 @@
-const USER_KEY = 'chat_user';
+export const USER_KEY = 'chat_user';
 
 export function saveUserName(name: string): void {
   if (typeof window !== 'undefined' && window.localStorage) {

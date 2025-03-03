@@ -26,19 +26,14 @@
 </ng-template>
 
 <ul class="wrapper">
-  <li
-    *ngFor="let message of filteredMessages$ | async"
-    [ngClass]="{ outgoing: message.author === userName.name }"
-  >
+  <li *ngFor="let message of filteredMessages$ | async">
     <mat-card appearance="outlined">
       <mat-card-header>
-        <mat-card-title class="author">{{ message.author }}</mat-card-title>
-        <mat-card-subtitle class="timestamp">{{
-          message.timestamp | date : "short"
-        }}</mat-card-subtitle>
+        <mat-card-title class="author">{{ userName.name }}</mat-card-title>
+        <mat-card-subtitle class="date">{{ message.date | date: 'short' }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p class="message-content">{{ message.text }}</p>
+        <p>{{ message.text }}</p>
       </mat-card-content>
     </mat-card>
   </li>
