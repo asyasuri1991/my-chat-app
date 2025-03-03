@@ -28,10 +28,11 @@ import { User } from '@features/user/model/user.model';
 export class AppComponent implements OnInit {
   userName: User = { name: '' };
   showModal: boolean = true;
-  processedMessages = new Set<string>();
-  public broadcastChannel = new BroadcastChannel('chat_channel');
-
-  constructor(private dialog: MatDialog, private chatService: ChatService) {}
+  broadcastChannel: BroadcastChannel;
+  
+  constructor(private dialog: MatDialog, private chatService: ChatService) {
+    this.broadcastChannel = new BroadcastChannel('chat_channel');
+  }
 
   ngOnInit(): void {
     const retrievedUserName = getUserName();
@@ -40,40 +41,17 @@ export class AppComponent implements OnInit {
     } else {
       this.userName = { name: '' };
     }
-    
-    console.log('Полученное userName:', this.userName.name);
     if (!this.userName.name) {
       this.openModal();
     } else {
       this.showModal = false;
     }
-    
-    this.setupBroadcastListener();
-  }
-
-  setupBroadcastListener(): void {
-    this.broadcastChannel.onmessage = (event) => {
-      const data = event.data;
-      if (!data.id || this.processedMessages.has(data.id)) {
-        return;
-      }
-      this.processedMessages.add(data.id);
-      if (data.userName && data.message) {
-        this.syncMessage(data.userName, data.message);
-      }
-    };
-  }
-
-  syncMessage(userName: string, message: string): void {
-    this.chatService.addMessage(userName, message);
-    console.log(`Сообщение от ${userName}: ${message}`);
   }
 
   sendMessage(message: string): void {
-    const messageId = uuidv4();
-    const data = { id: messageId, userName: this.userName.name, message };
-    this.broadcastChannel.postMessage(data);
-    this.chatService.addMessage(this.userName.name, message);
+    if (message.trim()) {
+      this.chatService.sendMessage(this.userName.name, message);
+    }
   }
 
   openModal(): void {

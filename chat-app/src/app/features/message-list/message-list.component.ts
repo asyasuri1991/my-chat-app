@@ -27,17 +27,12 @@ import { User } from '@features/user/model/user.model';
 })
 export class MessageListComponent {
   @Input() userName: User = { name: 'User' };
-
   messages$: Observable<Message[]>;
-
   private searchTerm$ = new BehaviorSubject<string>('');
-
   filteredMessages$: Observable<Message[]>;
 
   constructor(private chatService: ChatService) {
-    console.log('Полученный userName:', this.userName.name);
     this.messages$ = this.chatService.messages$;
-
     this.filteredMessages$ = this.searchTerm$.pipe(
       map((term: string) => term.toLowerCase()),
       switchMap((term: string) =>

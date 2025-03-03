@@ -12,7 +12,7 @@ const USER_KEY = 'chat_user';
   standalone: true,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  imports: [CommonModule, MatIconModule, MatButtonModule]
+  imports: [CommonModule, MatIconModule, MatButtonModule],
 })
 export class HeaderComponent {
   @Input() user!: User;
@@ -26,7 +26,6 @@ export class HeaderComponent {
     }
     if (this.broadcastChannel) {
       this.broadcastChannel.close();
-      console.log('BroadcastChannel закрыт');
     }
     window.location.reload();
   }

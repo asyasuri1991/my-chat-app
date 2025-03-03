@@ -27,7 +27,7 @@ export class ChatComponent implements OnInit {
   messageControl = new FormControl('');
   messages: Message[] = [];
 
-  constructor(public chatService: ChatService) {}
+  constructor(private chatService: ChatService) {}
 
   ngOnInit(): void {
     this.chatService.messages$.subscribe((messages) => {
@@ -38,8 +38,8 @@ export class ChatComponent implements OnInit {
   sendMessage(): void {
     const messageText = this.messageControl.value?.trim();
     if (messageText) {
-      this.chatService.addMessage(this.userName.name, messageText);
-      this.messageControl.reset();
+      this.chatService.sendMessage(this.userName.name, messageText);
+      this.messageControl.setValue('');
     }
   }
 }
