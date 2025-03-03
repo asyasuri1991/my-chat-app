@@ -1,59 +1,29 @@
-# ChatApp
+# 💬 Чат-приложение на Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+Это небольшое чат-приложение, разработанное на Angular. Оно поддерживает обмен сообщениями в реальном времени между несколькими вкладками браузера.
 
-## Development server
+## 📌 Функциональные требования
 
-To start a local development server, run:
+1. **Отображение списка сообщений**
+   - Сообщения отображаются в виде упорядоченного списка.
+   - Каждое сообщение содержит автора, время отправки и текст.
 
-```bash
-ng serve
-```
+2. **Форма для отправки сообщений**
+   - Поле ввода текста сообщения.
+   - Кнопка “Отправить”.
+   - Клавиша Enter отправляет сообщение.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+3. **Сохранение сообщений**
+   - Сообщения сохраняются в `localStorage`, чтобы после перезагрузки страницы они не исчезали.
 
-## Code scaffolding
+4. **Выбор имени пользователя**
+   - При первом входе в чат пользователь вводит своё имя (хранится в `localStorage`).
+   - Имя пользователя отображается в его сообщениях.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+5. **Эмуляция сервера (WebSocket)**
+   - Используются RxJS и Subject для имитации общения через WebSocket (само использование WebSocket не требуется).
+   - Сообщения отправляются и отображаются в чате без перезагрузки страницы.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+6. **Поддержка нескольких вкладок**
+   - Приложение поддерживает работу в разных вкладках браузера. Сообщения синхронизируются между вкладками.
+   - Используется Broadcast Channel API для передачи сообщений между вкладками.
