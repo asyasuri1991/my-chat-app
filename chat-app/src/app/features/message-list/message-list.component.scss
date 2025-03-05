@@ -19,11 +19,6 @@
   list-style: none;
 }
 
-.mat-list-item {
-  height: 200px;
-  margin-bottom: 1rem;
-}
-
 .author {
   font-weight: bold;
   color: #3f51b5;
@@ -31,7 +26,7 @@
   text-overflow: clip;
 }
 
-.timestamp {
+.date {
   font-size: 0.8em;
   color: #999;
 }

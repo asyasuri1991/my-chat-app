@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { v4 as uuidv4 } from 'uuid';
 
 import { HeaderComponent } from '@components/header/header.component';
 import { MessageListComponent } from '@features/message-list/message-list.component';
